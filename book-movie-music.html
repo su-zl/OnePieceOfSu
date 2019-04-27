@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+      }
+      .container{
+        margin: 30px 10px 30px 10px;
+        background-color: #eee;
+        display: flex;
+        justify-content:space-between;
+      }
+      .icon{
+        font-size: 70px;
+        margin: 0px 20px;
+        color: #ddd;
+      }
+      .icon i{
+          transition:color 1.2s;
+      }
+      .content{
+         padding:20px 40px 0px 0px;
+      }
+      .content{
+        text-align: right;
+      }   
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">书·影·音</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div class="container" @click="testClick" v-bind:style="{padding:container}">
+        <div class="icon">    
+           <i ref="testshow1"  class="fa fa-book"></i>          
+        </div>
+        <div class="content">
+            <h4>书籍是人类进步的阶梯.</h4>
+            <p>--高尔基</p>
+        </div>
+    </div> 
+    <div class="container" v-bind:style="{padding:container}">
+      <div class="icon">
+        <i class="fa fa-film"></i>
+      </div>
+      <div class="content">
+        <h4>电影是人类进步的阶梯.</h4>
+        <p>--基尔高</p>
+      </div>  
+    </div>
+    <div class="container" v-bind:style="{padding:container}">
+      <div class="icon">
+        <i class="fa fa-music"></i>
+      </div>
+      <div class="content">
+        <h4>俺也一样.</h4>
+        <p></p>
+      </div> 
+    </div>
+  </div>
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         testshow1:true
+      },
+      computed:{
+ 
+      },
+      methods: {
+        testClick(){
+           console.log('click');
+           this.$refs.testshow1.style.color='#000';
+           setTimeout(()=>{
+              window.location.href='tenBooks.html';
+           },1200)
+        }
+      },
+      created(){
+          this.container=((window.screen.height-document.getElementById('header').offsetHeight-120)/3-document.getElementsByClassName('content')[0].offsetHeight)/2+'px'+' 0px';
+          console.log(this.container);
+      },
+      mounted(){
+          this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      }
+         
+    })
+  </script>
+</html>

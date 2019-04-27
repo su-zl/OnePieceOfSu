@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+        font-family: Microsoft YaHei,Arial,sans-serif;
+      }
+      #header{
+        padding: 5px 0px;
+        color:#fff;
+        background-color: rgba(50,50,50,1);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 25px;
+      }
+      #header div{
+          float: left;
+          font-weight: bolder;
+          margin-left: 10px;
+      }
+      .divider{
+        border-bottom: 1px solid #eee;
+      }
+      .passages{
+         margin:20px 10px 20px 10px;
+      }
+      p{
+         margin: 5px 0px;
+         line-height: 1.7em;
+      }
+      .comment{
+         margin:20px 10px 20px 10px;
+      }
+      #library{
+        overflow-x: scroll;
+        /*margin-top: -83px;*/
+        background-color: #FFE4C4;
+     }
+     /*隐藏滚动条*/
+     #library::-webkit-scrollbar{
+       display: none;
+     }
+      #library>div{
+          display: flex;
+          flex-wrap: nowrap;
+          margin: 15px 10px;
+          align-items:center;
+      }
+      .list{
+         margin-right: 10px;
+      }
+      .list img{
+          width: 50px;
+      }
+      .selected{
+        border: 3px solid rgba(135,206,235,1);  
+      }
+      .selected img{
+          width: 55px;
+      }  
+      #library{
+        animation:jump 1.5s;
+      }
+      @keyframes jump{
+         0%{margin-top: -83px;}
+         25%{margin-top: -73px;}
+         50%{margin-top: -80px;}
+         75%{margin-top: -76px;}
+         100%{margin-top: -83px;}
+      }
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden;" v-bind:style="{visibility:loading}"  >
+     <div id="header">
+        <div>
+          <span>1</span><span>/10</span>
+        </div>
+        <h3 style="text-align: center;width:150px;margin:0 auto;">读书</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 10px;top: 5px;" @click=""></i>
+    </div> 
+    <div id="library" v-bind:style="{marginTop:libraryOffsetTop+'px'}">
+        <div>
+           <div class="list selected"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+           <div class="list"><img src="img/book_1.jpg"></div>
+        </div>
+    </div>
+    <div class="section"
+     @touchmove="isShowLibrary" @touchend="hideLibraay" >
+           <div style="display: flex;padding:20px 10px 0px 10px;" class="title">
+              <div>
+                <h2>哲学家们都干了些什么？</h2>
+                <p>林欣浩/ 辽宁教育出版社 / 274页 / 2011-5</p>
+              </div>
+               <div >
+                <img style="width: 100px;" src="img/book_1.jpg">
+              </div>
+           </div>
+           <div class="divider"></div>
+           <div class="passages">
+               <h4>摘抄：</h4>
+               <p>1.我们追求个人幸福的最高境界，不是纵欲，而是内心的平静。</p>
+               <p>2.统计学上有一句经典的话，相关性不代表因果性。</p>
+               <p>3.人的知识像一个圆圈, 知识越多，圆圈对周长越长，就会发现自己越无知。</p>
+           </div>
+           <div class="divider"></div>
+           <div class="comment">
+              <h4>我读：</h4>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了通俗易懂放弃严谨的科普，相当于哲学入门介绍帖集合，还参杂了作者本人不靠谱的理解和故作风趣的语言，让人十分难受。最可怕的是，作者对许多哲学学说和科学理论的解释多有谬误，误人子弟。并且作者可能是个带路党，字里行间充满对中国哲学的嘲讽和不屑，牵强附会，还黑得很低端。但也并非一无是处，有些哲学理论解释和介绍还是能看的。
+              为了通俗易懂放弃严谨的科普，相当于哲学入门介绍帖集合，还参杂了作者本人不靠谱的理解和故作风趣的语言，让人十分难受。最可怕的是，作者对许多哲学学说和科学理论的解释多有谬误，误人子弟。并且作者可能是个带路党，字里行间充满对中国哲学的嘲讽和不屑，牵强附会，还黑得很低端。但也并非一无是处，有些哲学理论解释和介绍还是能看的。
+              为了通俗易懂放弃严谨的科普，相当于哲学入门介绍帖集合，还参杂了作者本人不靠谱的理解和故作风趣的语言，让人十分难受。最可怕的是，作者对许多哲学学说和科学理论的解释多有谬误，误人子弟。并且作者可能是个带路党，字里行间充满对中国哲学的嘲讽和不屑，牵强附会，还黑得很低端。但也并非一无是处，有些哲学理论解释和介绍还是能看的。
+            </p>
+           </div>
+           <div class="divider"></div>
+           <div style="padding:5px 10px;color: #aaa;">
+              <i class="fa fa-hand-o-left" style="font-size: 2em;" @click=""></i>
+              <i class="fa fa-hand-o-right" style="float: right;font-size: 2em;" @click=""></i>
+           </div>
+    </div>
+  </div>
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         testshow1:true,
+         libraryOffsetTop:-83,
+         preMove:null
+      },
+      computed:{
+
+      },
+      methods: {
+        testClick(){
+           console.log('click');
+            this.$refs.testshow1.style.color='#000';
+           setTimeout(()=>{
+              window.location.href='tenBooks.html';
+           },2000)
+        },
+        sectionOffset(){
+           return document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+
+        },
+        isShowLibrary(event){
+            if(this.sectionOffset()==0){
+              if(!this.preMove){
+                  this.preMove=event.changedTouches[0].clientY;
+              }else{
+                  if(event.changedTouches[0].clientY-this.preMove>0){
+                       if(this.libraryOffsetTop<-60){
+                          this.libraryOffsetTop+=1;
+                          this.preMove=event.changedTouches[0].clientY
+                       }else{
+                           this.libraryOffsetTop=35;
+                           this.preMove=null;
+                       }
+                  }else{
+                       // console.log(event.changedTouches[0].clientY)
+                       // if(this.libraryOffsetTop>12 && this.sectionOffset()<118){
+                       //       this.libraryOffsetTop-=1;
+                       //       this.preMove=event.changedTouches[0].clientY
+                       // }else{
+                       //     this.libraryOffsetTop=-83;
+                       //     this.preMove=null;
+                       //     // document.body.scrollTop=-153;
+                       // }
+                  }
+              }
+          }else if(this.sectionOffset()<118 && this.libraryOffsetTop>-83){
+                  if(this.libraryOffsetTop>-83){
+                    this.libraryOffsetTop-=1;
+                    this.preMove=event.changedTouches[0].clientY
+                  }else{
+                    // this.libraryOffsetTop=-83;
+                    // this.preMove=null;
+                    // document.documentElement.scrollTop=0;
+                    // document.body.scrollTop=0;
+                  }
+          }
+        },
+        hideLibraay(){
+              console.log(this.sectionOffset());
+              if(this.sectionOffset()>=83 && this.libraryOffsetTop>-83){
+                    this.libraryOffsetTop=-83;
+                    this.preMove=null;
+                    // document.documentElement.scrollTop=0;
+                    document.body.scrollTop=0;
+              }
+        }
+      },
+      created(){
+          
+      },
+      mounted(){
+          this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      }
+    })
+  </script>
+</html>

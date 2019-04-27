@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+        color:#000;
+      }
+      #header{
+        padding: 5px 0px;
+        color:#000;
+        background-color: #ddd;
+      }
+      .sidebar{
+        display: inline-block;
+        width: 260px;height: 100%;
+        position: fixed;
+        top: 0px;
+        right: -260px;
+        z-index: 99;
+        background-color: #eee;
+      }
+      .sideContent{
+        color: #000;
+        padding: 30px;
+        list-style: none;
+        font-size: 20px;
+      }
+      .sideContent>li{
+        margin-bottom: 20px;
+      }
+      .sideContent a{
+         margin-left: 10px;
+         font-size: 20px;
+      }
+      .icon {
+          width: 1em;
+          height: 1em;
+          vertical-align: -0.15em;
+          fill: currentColor;
+          overflow: hidden;
+      }
+       td{
+           text-align: center;  
+           background-color: #fff;
+           padding: 1px;
+           position: relative;
+       }
+       td div:first-child{
+          width: 100%;
+          height: 100%;
+          background-color: #eee;
+          color: #000;
+          position: absolute;
+          top:0px;
+          left: 0px;
+          z-index: 1;
+          overflow: hidden;
+          backface-visibility:hidden;
+       }
+       td div:last-child{
+          width: 100%;
+          height: 100%;
+          background-color: #fff;
+          position: absolute;
+          top:0px;
+          left: 0px;
+          z-index: 0;
+          backface-visibility:hidden;
+       }
+       a{
+         text-decoration: none;
+         color: #000;
+       }
+        .bounce-leave-active {
+          animation: bounce-in 2s;
+        }
+        .bounce-enter-active {
+          animation: bounce2-in 2s;
+        }
+        @keyframes bounce-in {
+          0% {
+            transform: rotateY(0deg);
+          }
+          100% {
+            transform: rotateY(180deg);
+          }
+        }
+        @keyframes bounce2-in {
+          0% {
+            transform: rotateY(180deg);
+          }
+          100% {
+            transform: rotateY(0deg);
+          }
+        }
+  </style>
+  <script src="css/font_kji4c6b8jki/iconfont.js"></script>
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+    <!-- <div ref="loading"  v-bind:style="{width: loadingWidth+'px',height: loadingHeight+'px',backgroundColor: '#fff',position: 'fixed',overflow:'hidden',zIndex:'999'}">
+    </div>  --> 
+    <div id="header">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">OnePieceOfSu</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click="isShowSidebar"></i>
+    </div>
+    <div class="sidebar" v-bind:style="{right:sidebarRight+'px'}">
+       <ul class="sideContent">
+           <li><i class="fa fa-home"></i><a href="index.html">首页</a></li>
+           <li>
+            <i>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-douban"></use>
+                </svg>
+            </i>
+            <a href="book-movie-music.html">书影音</a></span>
+           </li>
+           <li><i class="fa fa-calendar"></i><a href="timeTravel.html">时光里</a></li>
+           <li><i class="fa fa-pencil-square-o"></i><a href="artical.html">文字记</a></li>   
+           <li><i class="fa fa-comment"></i><a href="message.html">留言</a></li>   
+       </ul>   
+    </div>
+    <div v-show="mid" @click="isShowMid" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.2);position: fixed;z-index: 98;">
+    </div>
+    
+    <div id="content">
+        <table  v-bind:style="{width: '100%',height:tableHeight+'px'}">
+          <tr @bombCheck="resultCheck" >
+            <td>
+                <transition  name="bounce">
+                    <div v-show="testshow" @click="testClick">
+                      <img src="img/tree.jpg" :style="{height:tableHeight+'px'}">
+                    </div>
+                </transition>
+                <transition  name="bounce">
+                    <div v-show="!testshow">456</div>
+                </transition>  
+            </td>
+            <td><div></div><span>1</span></td>
+            <td><div></div><span>1</span></td>
+          </tr>
+          <overturn-box v-for=""  :items="" :table-height="table-height" :table-width="table-width">
+               <template v-slot:zero>
+                  壹
+               </template>
+               <template v-slot:first>
+                  贰
+               </template>
+               <template v-slot:second>
+                  叁
+               </template>
+               <template v-slot:zero>
+                  壹
+               </template>
+               <template v-slot:first>
+                  贰
+               </template>
+               <template v-slot:second>
+                  叁
+               </template>
+               <template v-slot:zero>
+                  壹
+               </template>
+               <template v-slot:first>
+                  贰
+               </template>
+               <template v-slot:second>
+                  叁
+               </template>
+               <template v-slot:zero>
+                  壹
+               </template>
+               <template v-slot:first>
+                  贰
+               </template>
+               <template v-slot:second>
+                  叁
+               </template>
+               <template v-slot:zero>
+                  壹
+               </template>
+               <template v-slot:first>
+                  贰
+               </template>
+               <template v-slot:second>
+                  叁
+               </template>
+          </overturn-box>
+        </table>
+    </div>
+</div>
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+   Vue.component("overturn-box",{
+       template:`
+            <tr>
+              <td v-for="(item,index) in items">
+                <transition  name="bounce">
+                    <div v-show="item.isPre" @click="bombClick(index)">
+                       <img src={{item.imgSrc}} :style="{height:tableHeight+'px',margin:getImgMargin(index)}" />
+                    </div>
+                </transition>
+                <transition  name="bounce">
+                    <div v-show="!item.isPre">
+                      <span>{{item.aroundBomb==0?"":item.aroundBomb}}</span>
+                      <slot name="zero" v-if="item.id==0"></slot>
+                      <slot name="first" v-if="item.id==1"></slot>
+                      <slot name="second" v-if="item.id==2"></slot>
+                      <slot name="third" v-if="item.id==3"></slot>
+                      <slot name="four" v-if="item.id==4"></slot>
+                      <slot name="five" v-if="item.id==5"></slot>
+                      <slot name="six" v-if="item.id.id==6"></slot>
+                      <slot name="seven" v-if="item.id==7"></slot>
+                      <slot name="eight" v-if="item.id==8"></slot>
+                      <slot name="nine" v-if="item.id==9"></slot>
+                      <slot name="ten" v-if="item.id==10"></slot>
+                      <slot name="eleven" v-if="item.id==11"></slot>
+                      <slot name="twelve" v-if="item.id==12"></slot>
+                      <slot name="thirteen" v-if="item.id==13"></slot>
+                      <slot name="fourteen" v-if="item.id==14"></slot>
+                    </div>
+                </transition>  
+              </td>
+            </tr>
+       `,
+       props:['items','tableHeight','tableWidth'],
+       methods:{
+           bombClick(index){
+               if(!this.items[index].isEnd){
+                 this.items[index].isPre=false;
+                 var param={id:this.items[index].id,isBomb:this.items[index].isBomb,aroundBomb:this.items[index].aroundBomb};
+                 this.emit(bombCheck,param);
+               }
+           },
+           getImgMargin(index){
+               var id=this.items[index];               
+               var col=id%3;
+               var row=Math.ceil(id/3);
+               return '-'+(row-1)*(this.tableWidth/3)+'px 0px 0px '+'-'+(col-1)*(this.tableHeight/5)+'px';
+           }
+       }
+    })
+    new Vue({
+      el: '#app',
+      data:{
+        mid:false,
+        sidebarRight:-260,
+        testshow:true,
+        bombData:null,
+        tableHeight:'',
+        tableWidth:'',
+        loadingWidth:'',
+        loadingHeight:'',
+        loading:'visible'
+      },
+      computed:{
+            
+      },
+      methods: {
+        isShowSidebar(){
+          this.mid=true;
+          let that=this;
+          const sideAnime=setInterval(function(){
+              if(that.sidebarRight<0){
+                  that.sidebarRight+=Math.abs(that.sidebarRight)/10;
+                  if(that.sidebarRight>-1){
+                      that.sidebarRight=0;
+                  }
+              }else{
+                clearInterval(sideAnime);
+              }
+          },10)
+        },
+        isShowMid(){
+            this.mid=false;
+            let that=this;
+            const sideAnime=setInterval(function(){
+              if(that.sidebarRight>-260){
+                  that.sidebarRight-=Math.abs(that.sidebarRight-260)/10;
+                  if(that.sidebarRight<-259){
+                      that.sidebarRight=-260;
+                  }
+              }else{
+                clearInterval(sideAnime);
+              }
+            },20)
+        },
+        testClick(){
+            this.testshow=false;
+        },
+        resultCheck(param){
+             function checkAround(id){
+                 const arr1=[4,3,2,1,-1,-2,-3,-4];
+                 let arr2=[];
+                 for (let i = 0; i < arr1.length; i++) {
+                    if(id-arr[i]>-1){
+                         arr2.push(id-arr[i])
+                    }
+                 }
+                 for (let i = 0; i < arr2.length; i++) {
+                     if(this.bombData[arr2[i]].aroundBomb==0){
+                         checkAround(arr2[i]);
+                         this.bombData[arr2[i]].isPre=false;
+                     }
+                 }
+             }
+             if(param.isBomb){
+                 for (var i = 0; i < this.bombData.length; i++) {
+                     this.bombData[i].isEnd=true;
+                     if(!this.bombData[i].isBomb){
+                        this.bombData[i].isPre=false;
+                     }
+                 }
+             }else{
+                  let count=[];
+                  checkAround(param.id);
+                  this.bombData[param.id].isPre=false;
+                  for (let i = 0; i < this.bombData.length; i++) {
+                      if(!this.bombData[i].isPre){
+                          count.push(i);
+                      }
+                  }
+                  if(count.length==2){
+                      for (let i = 0; i < count.length; i++) {
+                          this.bombData[i].isPre=false;
+                      }
+                  }
+             }
+        }
+      },
+      created(){
+          this.tableHeight=window.screen.height-document.getElementById('content').offsetTop;
+          this.tableWidth=document.getElementById('content').clientWidth;
+          this.loadingWidth=window.screen.width; 
+          this.loadingHeight=window.screen.height;
+      },
+      mounted(){
+          
+      }
+         
+    })
+  </script>
+</html>
