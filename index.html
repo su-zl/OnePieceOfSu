@@ -46,12 +46,16 @@
           fill: currentColor;
           overflow: hidden;
       }
+      tr{
+        border-style: none;
+      }
        td{
            text-align: center;  
            background-color: #fff;
            padding: 1px;
            position: relative;
            overflow: hidden;
+           border-style: none;
        }
        td>div:first-child{
           width: 100%;
@@ -119,7 +123,7 @@
           }
         }
   </style>
-  <script src="css/font_kji4c6b8jki/iconfont.js"></script>
+  <script src="css/font_1224039_epgl90g4y0l/iconfont.js"></script>
 </head>
 <body>
   <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
@@ -142,7 +146,13 @@
            </li>
            <li><i class="fa fa-calendar"></i><a href="timeTravel.html">时光里</a></li>
            <li><i class="fa fa-pencil-square-o"></i><a href="artical.html">文字记</a></li>
-           <li><i class="fa fa-pencil-square-o"></i><a href="artical.html">钓鱼记</a></li>   
+           <li>
+            <i>
+                <svg class="icon" aria-hidden="true" style="font-size: 1.3em;">
+                  <use xlink:href="#icon-yu"></use>
+                </svg>
+            </i>
+            <a href="whimsy.html">钓鱼记</a></li>   
            <li><i class="fa fa-comment"></i><a href="message.html">留言</a></li>   
        </ul>   
     </div>

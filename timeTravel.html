@@ -22,6 +22,7 @@
       #content>div{
          width: 45%;
          margin-bottom: 20px;
+         overflow: hidden;
       }
       #content p,#content h4{
         text-align: center;
@@ -47,37 +48,12 @@
         <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
     </div> 
     <div id="content">
-        <div>
+        <div v-for="item in Data" :key="item.id" @click="enterAlbum(item.id)">
            <div class="imgBox" :style="{height:boxHeight+'px'}">
-             <img src="img/1.png" :style="{width: +'px',height: +'px'}">
+             <img :src="item.imgSrc" :style="{height: boxHeight+'px'}">
            </div>
-            <h4>无知时代</h4>
-            <p>10</p>
-        </div>
-        <div>
-           <div class="imgBox" :style="{height:boxHeight+'px'}"></div>
-            <h4>小学时代</h4>
-            <p>10</p>
-        </div>
-        <div>
-          <div  class="imgBox" :style="{height:boxHeight+'px'}"></div>
-          <h4>初中时代</h4>
-            <p>10</p>
-        </div>
-        <div>
-          <div  class="imgBox" :style="{height:boxHeight+'px'}"></div>
-          <h4>高中时代</h4>
-            <p>10</p>
-        </div>
-        <div>
-          <div  class="imgBox" :style="{height:boxHeight+'px'}"></div>
-          <h4>大学时代</h4>
-            <p>10</p>
-        </div>
-        <div>
-          <div  class="imgBox" :style="{height:boxHeight+'px'}"></div>
-          <h4>工作时代</h4>
-            <p>10</p>
+            <h4>{{item.content}}</h4>
+            <p>{{item.count}}</p>
         </div>
     </div> 
     
@@ -92,18 +68,52 @@
       el: '#app',
       data:{
          loading:true,
-         boxHeight:0
+         boxHeight:0,
+         Data:[
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"无知时代",
+                  count:10,
+                  id:0
+               },
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"小学时代",
+                  count:10,
+                  id:1
+               },
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"初中时代",
+                  count:10,
+                  id:2
+               },
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"高中时代",
+                  count:10,
+                  id:3
+               },
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"大学时代",
+                  count:10,
+                  id:4
+               },
+               {
+                  imgSrc:"img/1.jpg",
+                  content:"工作时代",
+                  count:10,
+                  id:5
+               }
+              ]
       },
       computed:{
           
       },
       methods: {
-        testClick(){
-           console.log('click');
-           this.$refs.testshow1.style.color='#000';
-           setTimeout(()=>{
-              window.location.href='tenBooks.html';
-           },1200)
+        enterAlbum:function(id){
+            window.location.href="timeAlbum.html";
         }
       },
       created(){
