@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+      }
+      #container{
+        padding:10px 10px;
+        background-color: #fff;
+      }
+
+      .section{
+         padding: 10px;
+         background-color: #eee;
+         line-height: 2em;
+         text-align: left;
+         margin-bottom: 10px;
+      }
+      .content{
+         padding-bottom: 10px;
+      }
+      .time{
+         color: #aaa;
+         font-size: 0.8em;
+      }
+      .name{
+        font-size: 0.6em;
+        color: #8470FF;
+      }
+      .comment{
+        font-size: 0.6em;
+      }
+      .imgList{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap:wrap;
+      }
+      .imgBox{
+        display: flex;
+        flex-wrap:wrap;
+        justify-content: center;
+        align-items:center; ;
+        overflow: hidden;
+        width: 100px;
+        height: 100px;
+      }
+
+
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">书·影·音</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div id="container">
+        <div class="section" v-for="item in Data" v-bind:key="item.id">    
+           <div class="content">
+            <p>{{item.content}}</p>
+           </div>
+           <div class="time">
+             <span>{{item.time}}</span>
+           </div>
+           <div class="imgList">
+             <div class="imgBox" v-for="imgItem in item.imgList">
+               <img @load="AutoResizeImage(100,$event.target)" :src="imgItem.imgSrc_little" >
+             </div>
+           </div>
+           <div>
+               <div v-for="commentItem in item.commentList">
+                  <span class="name">{{commentItem.name}}:</span>
+                  <span class="comment">{{commentItem.comment}}</span>
+               </div>
+           </div>
+        </div>
+        
+
+    </div> 
+  </div>
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         Data:[
+         {
+            id:'0',
+            content:'天上一只鹅，地上一只鹅，天上那只肥鹅鹅爱上地上那只瘦鹅鹅，鹅飞鹅打鹅碰鹅。',
+            time:'2018-10-21 10:21',
+            imgList:[
+            {
+              imgSrc_little:"img/timeAlbum/1_litter.jpg",
+              imgSrc_big:"img/timeAlbum/1_big. "
+            },
+            {
+              imgSrc_little:"img/timeAlbum/2_litter.jpg",
+              imgSrc_big:"img/timeAlbum/1_big. "
+            },
+            {
+              imgSrc_little:"img/timeAlbum/1_litter.jpg",
+              imgSrc_big:"img/timeAlbum/1_big. "
+            },
+            {
+              imgSrc_little:"img/timeAlbum/2_litter.jpg",
+              imgSrc_big:"img/timeAlbum/1_big. "
+            }
+            ],
+            commentList:[
+            {
+              name:'一名不愿透露姓名的网友',
+              comment:'红红火火恍恍惚惚'
+            },
+            {
+              name:'一名不愿透露姓名的网友2',
+              comment:'红红火火恍恍惚惚'
+            }
+            ]
+
+         },
+         ]
+         
+      },
+      computed:{
+ 
+      },
+      methods: {
+        AutoResizeImage(minWidth,objImg){
+            var img = new Image();
+            img.src = objImg.src;
+
+            var wRatio;
+            var Ratio = 1;
+            var w = img.width;
+            var h = img.height;
+            if(w>h){
+               Ratio=minWidth / h;
+            }else{
+               Ratio=minWidth / w;  
+            }
+
+            w = w * Ratio;
+            h = h * Ratio;
+            
+            objImg.height = h;
+            objImg.width = w;
+        }
+      },
+      created(){
+          
+      },
+      mounted(){
+          this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      }
+         
+    })
+  </script>
+</html>
