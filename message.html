@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+      }
+      #tips{
+        color: #aaa;
+        font-size: 0.7em;
+        border-bottom: 8px solid #ddd;
+        padding: 5px 0px 5px 5px;
+      }
+      #container{ 
+        background-color: #fff;
+      }
+      
+      .section{
+         padding: 10px 10px 10px 30px;
+         background-color: #eee;  
+         text-align: left;
+         margin-bottom: 10px;
+         background-image: url(img/wood.jpg);
+         background-repeat: repeat-y;
+      }
+      .name{
+         font-size: 0.9em;  
+         font-weight: bold;
+      }
+      .date{
+        color: #aaa;
+        font-size: 0.7em; 
+      }
+      .content{
+         padding-bottom: 10px;
+         line-height: 1.7em;
+      }
+      
+
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">留言板</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div id="tips" @click="leaveMessage">
+      <p>留个言吧......</p>
+    </div>
+    <div id="container">
+        <div class="section" v-for="item in Data" v-bind:key="item.id">    
+           <div>
+            <p class="name">{{item.name}}</p>
+            <p class="date">{{item.date}}</p>
+           </div>
+           <div>
+             <p class="content">{{item.content}}</p>
+           </div>     
+        </div>
+        
+
+    </div> 
+  </div>
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         imgWidth:null,
+         Data:[
+         {
+            id:'0',
+            content:'天上一只鹅，地上一只鹅，天上那只肥鹅鹅爱上地上那只瘦鹅鹅，鹅飞鹅打鹅碰鹅。',
+            date:'2018-10-21 ',
+            name:"一名不愿透露姓名的网友"
+         },
+         {
+            id:'1',
+            content:'天上一只鹅，地上一只鹅，天上那只肥鹅鹅爱上地上那只瘦鹅鹅，鹅飞鹅打鹅碰鹅。',
+            date:'2018-10-21 ',
+            name:"一名不愿透露姓名的网友"
+         },
+         {
+            id:'2',
+            content:'天上一只鹅，地上一只鹅，天上那只肥鹅鹅爱上地上那只瘦鹅鹅，鹅飞鹅打鹅碰鹅。',
+            date:'2018-10-21 ',
+            name:"一名不愿透露姓名的网友"
+         },
+         {
+            id:'3',
+            content:'天上一只鹅，地上一只鹅，天上那只肥鹅鹅爱上地上那只瘦鹅鹅，鹅飞鹅打鹅碰鹅。',
+            date:'2018-10-21 ',
+            name:"一名不愿透露姓名的网友"
+         }
+         ]
+         
+      },
+      computed:{
+ 
+      },
+      methods: {
+        AutoResizeImage(minWidth,objImg){
+            var img = new Image();
+            img.src = objImg.src;
+
+            var wRatio;
+            var Ratio = 1;
+            var w = img.width;
+            var h = img.height;
+            if(w>h){
+               Ratio=minWidth / h;
+            }else{
+               Ratio=minWidth / w;  
+            }
+
+            w = w * Ratio;
+            h = h * Ratio;
+            
+            objImg.height = h;
+            objImg.width = w;
+        },
+        leaveMessage(){
+
+        }
+      },
+      created(){
+          
+      },
+      mounted(){
+          this.imgWidth=(document.getElementsByClassName("section")[0].clientWidth-24)/3
+          this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      }
+         
+    })
+  </script>
+</html>
