@@ -46,16 +46,21 @@
           fill: currentColor;
           overflow: hidden;
       }
+      tr{
+        border-style: none;
+      }
        td{
            text-align: center;  
            background-color: #fff;
            padding: 1px;
            position: relative;
+           overflow: hidden;
+           border-style: none;
        }
-       td div:first-child{
+       td>div:first-child{
           width: 100%;
           height: 100%;
-          background-color: #eee;
+          /*background-color: #fff;*/
           color: #000;
           position: absolute;
           top:0px;
@@ -64,7 +69,7 @@
           overflow: hidden;
           backface-visibility:hidden;
        }
-       td div:last-child{
+       td>div:last-child{
           width: 100%;
           height: 100%;
           background-color: #fff;
@@ -73,7 +78,24 @@
           left: 0px;
           z-index: 0;
           backface-visibility:hidden;
+          display: flex;
+          justify-content: center;
+          align-items:center;
        }
+       td>div:last-child span{
+          position:absolute;
+          display: inline-block;
+          width: 15px;
+          height: 15px;
+          font-size: 15px;
+          line-height: 15px;
+          bottom:1px;
+          right:0px;
+          font-weight: bolder;
+          background-color: red;
+          color: white;
+       }
+
        a{
          text-decoration: none;
          color: #000;
@@ -101,7 +123,7 @@
           }
         }
   </style>
-  <script src="css/font_kji4c6b8jki/iconfont.js"></script>
+  <script src="css/font_1224039_epgl90g4y0l/iconfont.js"></script>
 </head>
 <body>
   <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
@@ -124,7 +146,13 @@
            </li>
            <li><i class="fa fa-calendar"></i><a href="timeTravel.html">时光里</a></li>
            <li><i class="fa fa-pencil-square-o"></i><a href="artical.html">文字记</a></li>
-           <li><i class="fa fa-pencil-square-o"></i><a href="artical.html">钓鱼记</a></li>   
+           <li>
+            <i>
+                <svg class="icon" aria-hidden="true" style="font-size: 1.3em;">
+                  <use xlink:href="#icon-yu"></use>
+                </svg>
+            </i>
+            <a href="whimsy.html">钓鱼记</a></li>   
            <li><i class="fa fa-comment"></i><a href="message.html">留言</a></li>   
        </ul>   
     </div>
@@ -133,7 +161,7 @@
     
     <div id="content">
         <table  v-bind:style="{width: '100%',height:tableHeight+'px'}">
-          <tr @bombCheck="resultCheck" >
+          <!-- <tr @bomb-check="resultCheck" >
             <td>
                 <transition  name="bounce">
                     <div v-show="testshow" @click="testClick">
@@ -141,59 +169,13 @@
                     </div>
                 </transition>
                 <transition  name="bounce">
-                    <div v-show="!testshow">456</div>
+                    <div v-show="!testshow">0</div>
                 </transition>  
             </td>
             <td><div></div><span>1</span></td>
-            <td><div></div><span>1</span></td>
-          </tr>
-          <overturn-box v-for=""  :items="" :table-height="table-height" :table-width="table-width">
-               <template v-slot:zero>
-                  壹
-               </template>
-               <template v-slot:first>
-                  贰
-               </template>
-               <template v-slot:second>
-                  叁
-               </template>
-               <template v-slot:zero>
-                  壹
-               </template>
-               <template v-slot:first>
-                  贰
-               </template>
-               <template v-slot:second>
-                  叁
-               </template>
-               <template v-slot:zero>
-                  壹
-               </template>
-               <template v-slot:first>
-                  贰
-               </template>
-               <template v-slot:second>
-                  叁
-               </template>
-               <template v-slot:zero>
-                  壹
-               </template>
-               <template v-slot:first>
-                  贰
-               </template>
-               <template v-slot:second>
-                  叁
-               </template>
-               <template v-slot:zero>
-                  壹
-               </template>
-               <template v-slot:first>
-                  贰
-               </template>
-               <template v-slot:second>
-                  叁
-               </template>
-          </overturn-box>
+            <td><div></div><span>2</span></td>
+          </tr> -->
+          <tr is="overturn-box" v-for="data in  bombData"  :items="data" :table-height="tableHeight" :table-width="tableWidth" @bomb-check="resultCheck" ></tr>
         </table>
     </div>
 </div>
@@ -209,28 +191,16 @@
             <tr>
               <td v-for="(item,index) in items">
                 <transition  name="bounce">
-                    <div v-show="item.isPre" @click="bombClick(index)">
-                       <img src={{item.imgSrc}} :style="{height:tableHeight+'px',margin:getImgMargin(index)}" />
+                    <div v-show="item.isPre" @click="bombClick(item.order)">
+                       <img :src="item.imgSrc" :style="{height:tableHeight+'px',width:tableWidth+'px',margin:getImgMargin(item.order)}" />
                     </div>
                 </transition>
                 <transition  name="bounce">
                     <div v-show="!item.isPre">
-                      <span>{{item.aroundBomb==0?"":item.aroundBomb}}</span>
-                      <slot name="zero" v-if="item.id==0"></slot>
-                      <slot name="first" v-if="item.id==1"></slot>
-                      <slot name="second" v-if="item.id==2"></slot>
-                      <slot name="third" v-if="item.id==3"></slot>
-                      <slot name="four" v-if="item.id==4"></slot>
-                      <slot name="five" v-if="item.id==5"></slot>
-                      <slot name="six" v-if="item.id.id==6"></slot>
-                      <slot name="seven" v-if="item.id==7"></slot>
-                      <slot name="eight" v-if="item.id==8"></slot>
-                      <slot name="nine" v-if="item.id==9"></slot>
-                      <slot name="ten" v-if="item.id==10"></slot>
-                      <slot name="eleven" v-if="item.id==11"></slot>
-                      <slot name="twelve" v-if="item.id==12"></slot>
-                      <slot name="thirteen" v-if="item.id==13"></slot>
-                      <slot name="fourteen" v-if="item.id==14"></slot>
+                      <div>
+                        <img :src="item.backImgSrc" :style="{width:backImgWidth+'px'}" >
+                        <span v-if="!item.isBomb && item.aroundBomb">{{item.aroundBomb}}</span>
+                      </div> 
                     </div>
                 </transition>  
               </td>
@@ -238,19 +208,29 @@
        `,
        props:['items','tableHeight','tableWidth'],
        methods:{
-           bombClick(index){
-               if(!this.items[index].isEnd){
-                 this.items[index].isPre=false;
-                 var param={id:this.items[index].id,isBomb:this.items[index].isBomb,aroundBomb:this.items[index].aroundBomb};
-                 this.emit(bombCheck,param);
+           bombClick(order){
+               var col=order%3;
+               var row=Math.floor(order/3); 
+               if(!this.items[col].isEnd){
+                 this.items[col].isPre=false;
+                 var param={order:order,isBomb:this.items[col].isBomb,aroundBomb:this.items[col].aroundBomb};
+                 this.$emit('bomb-check',param);
                }
            },
-           getImgMargin(index){
-               var id=this.items[index];               
-               var col=id%3;
-               var row=Math.ceil(id/3);
-               return '-'+(row-1)*(this.tableWidth/3)+'px 0px 0px '+'-'+(col-1)*(this.tableHeight/5)+'px';
+           getImgMargin(order){               
+               var col=order%3;
+               var row=Math.floor((order)/3);
+               return row*(this.tableHeight/5)*-1+'px 0px 0px '+col*(this.tableWidth/3)*-1+'px';
            }
+       },
+       computed:{
+          backImgWidth:function(){
+             if(this.tableWidth/3>this.tableHeight/5){
+                return this.tableHeight/5
+             }else{
+                return this.tableWidth/3
+             }
+          }
        }
     })
     new Vue({
@@ -259,7 +239,32 @@
         mid:false,
         sidebarRight:-260,
         testshow:true,
-        bombData:null,
+        Data:[
+        [
+        {order:0,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/1.jpg'},
+        {order:1,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/2.jpg'},
+        {order:2,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/3.jpg'}
+        ],
+        [
+        {order:3,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/4.jpg'},
+        {order:4,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/5.jpg'},
+        {order:5,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/6.jpg'}
+        ],
+        [
+        {order:6,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/7.jpg'},
+        {order:7,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/8.jpg'},
+        {order:8,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/9.jpg'}
+        ],
+        [
+        {order:9,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/10.jpg'},
+        {order:10,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/11.jpg'},
+        {order:11,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/12.jpg'}
+        ],
+        [
+        {order:12,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/13.jpg'},
+        {order:13,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/14.jpg'},
+        {order:14,isBomb:false,aroundBomb:0,isPre:true,isEnd:false,hasCheck:false,imgSrc:'img/tree.jpg',backImgSrc:'img/15.jpg'}
+        ]],
         tableHeight:'',
         tableWidth:'',
         loadingWidth:'',
@@ -267,7 +272,70 @@
         loading:'visible'
       },
       computed:{
-            
+            bombData:function(){
+             function checkAround(data,order){
+                 //检查周围八个
+                 var col=order%3;
+                 var row=Math.floor(order/3);
+                 var arr2=[]; //3,1
+                 var positionArr=[{row:row-1,col:col-1},
+                                  {row:row-1,col:col},
+                                  {row:row-1,col:col+1},
+                                  {row:row,col:col-1},
+                                  {row:row,col:col+1},
+                                  {row:row+1,col:col-1},
+                                  {row:row+1,col:col},
+                                  {row:row+1,col:col+1}
+                                  ];
+                for (var i = 0; i < positionArr.length; i++) {
+                  if(positionArr[i].row>=0 && positionArr[i].row<5 &&positionArr[i].col>=0&&positionArr[i].col<3){
+                    if(data[positionArr[i].row][positionArr[i].col].isBomb){
+                        arr2.push(positionArr[i]);
+                    }                 
+                  }
+                }
+                return arr2.length;
+              }
+              var data=this.Data;;
+              //随机分布图片
+              var index1;
+              var index2;
+              var imgIndexArr=[];
+              var temp=null;
+              for (var i = 1; i < 16; i++) {
+                imgIndexArr.push(i);
+              }
+              for (var i = 0; i < 10; i++) {
+                index1=Math.floor(Math.random()*14);
+                index2=Math.floor(Math.random()*14);
+                temp=imgIndexArr[index1];
+                imgIndexArr[index1]=imgIndexArr[index2];
+                imgIndexArr[index2]=temp;
+              }
+              for (var i = 0; i < 15; i++) {
+                  data[Math.floor(i/3)][i%3].backImgSrc="img/"+imgIndexArr[i]+".jpg";
+              }
+              //随机生成两个雷
+              do {
+                  index1=Math.floor(Math.random()*14);
+                  index2=Math.floor(Math.random()*14);
+              }
+              while(index1==index2)
+              var col1=index1%3;
+              var row1=Math.floor(index1/3);
+              var col2=index2%3;
+              var row2=Math.floor(index2/3);
+              data[row1][col1].isBomb=true;
+              data[row1][col1].backImgSrc='img/bomb.jpg';
+              data[row2][col2].isBomb=true;
+              data[row2][col2].backImgSrc='img/bomb.jpg';
+              
+              for (var i = 0; i < 15; i++) {
+                  data[Math.floor(i/3)][i%3].aroundBomb=checkAround(data,i);
+              }
+              
+              return data;
+            }
       },
       methods: {
         isShowSidebar(){
@@ -302,40 +370,64 @@
             this.testshow=false;
         },
         resultCheck(param){
-             function checkAround(id){
-                 const arr1=[4,3,2,1,-1,-2,-3,-4];
+            var that=this;
+             function checkAround(order){
+                 //检查周围八个
+                 var col=order%3;
+                 var row=Math.floor(order/3);
                  let arr2=[];
-                 for (let i = 0; i < arr1.length; i++) {
-                    if(id-arr[i]>-1){
-                         arr2.push(id-arr[i])
-                    }
-                 }
+                 var positionArr=[{row:row-1,col:col-1},
+                                  {row:row-1,col:col},
+                                  {row:row-1,col:col+1},
+                                  {row:row,col:col-1},
+                                  {row:row,col:col+1},
+                                  {row:row+1,col:col-1},
+                                  {row:row+1,col:col},
+                                  {row:row+1,col:col+1}
+                                  ];
+                for (var i = 0; i < positionArr.length; i++) {
+                  if(positionArr[i].row>=0 && positionArr[i].row<5 &&positionArr[i].col>=0&&positionArr[i].col<3){
+                    if(!that.bombData[positionArr[i].row][positionArr[i].col].hasCheck){
+                        arr2.push(positionArr[i]);
+                    }                 
+                  }
+                }
                  for (let i = 0; i < arr2.length; i++) {
-                     if(this.bombData[arr2[i]].aroundBomb==0){
-                         checkAround(arr2[i]);
-                         this.bombData[arr2[i]].isPre=false;
+                     if(that.bombData[arr2[i].row][arr2[i].col].aroundBomb<2 &&that.bombData[arr2[i].row][arr2[i].col].isBomb==false){
+                         setTimeout(function(){
+                           that.bombData[arr2[i].row][arr2[i].col].isPre=false;
+                         },200*i);
+                         that.bombData[arr2[i].row][arr2[i].col].hasCheck=true;
+                         checkAround(arr2[i].row*3+arr2[i].col);
                      }
                  }
              }
+             // 是炸弹,其余炸弹翻转,全部禁用
              if(param.isBomb){
                  for (var i = 0; i < this.bombData.length; i++) {
-                     this.bombData[i].isEnd=true;
-                     if(!this.bombData[i].isBomb){
-                        this.bombData[i].isPre=false;
+                  for (var j = 0; j < this.bombData[i].length; j++) {
+                      this.bombData[i][j].isEnd=true;
+                      if(this.bombData[i][j].isBomb){
+                        this.bombData[i][j].isPre=false;
                      }
+                  }         
                  }
              }else{
                   let count=[];
-                  checkAround(param.id);
-                  this.bombData[param.id].isPre=false;
+                  checkAround(param.order);
+                  this.bombData[Math.floor(param.order/3)][param.order%3].isPre=false;
                   for (let i = 0; i < this.bombData.length; i++) {
-                      if(!this.bombData[i].isPre){
-                          count.push(i);
+                    for (var j = 0; j < this.bombData[i].length; j++) {
+                         if(this.bombData[i][j].isPre){
+                           count.push({row:i,col:j});
                       }
+                    }
+                      
                   }
                   if(count.length==2){
                       for (let i = 0; i < count.length; i++) {
-                          this.bombData[i].isPre=false;
+                          this.bombData[count[i].row][count[i].col].backImgSrc="img/bombfree.jpg"
+                          this.bombData[count[i].row][count[i].col].isPre=false;
                       }
                   }
              }

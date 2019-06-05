@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+        font-family: Microsoft YaHei,Arial,sans-serif;
+      }
+      #content{
+        margin: 30px 10px 30px 10px;
+        display: flex;
+        flex-wrap:wrap ;
+        justify-content:space-around;
+
+      }
+      #content>div{
+         width: 45%;
+         margin-bottom: 20px;
+         overflow: hidden;
+      }
+      #content p,#content h4{
+        text-align: center;
+      }
+      #content p{
+        font-size: 0.8em;
+      }
+      .imgBox{
+        border: 1px solid #eee;
+        margin-bottom: 5px;
+      }
+      .imgBox img{
+         width: 100%;
+      }
+
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">时光里</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div id="content">
+        <div v-for="item in Data" :key="item.id" @click="enterAlbum(item.id)">
+           <div class="imgBox" :style="{height:boxHeight+'px'}">
+             <img :src="item.imgSrc" :style="{height: boxHeight+'px'}">
+           </div>
+            <h4>{{item.content}}</h4>
+            <p>{{item.count}}</p>
+        </div>
+    </div> 
+    
+  </div>  
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         loading:true,
+         boxHeight:0,
+         Data:[
+               {
+                  imgSrc_little:"img/timeAlbum/1_litter.jpg",
+                  imgSrc_big:"img/timeAlbum/1_big.jpg",
+                  describe:""
+               },
+               
+              ]
+      },
+      computed:{
+          
+      },
+      methods: {
+        
+      },
+      created(){
+          this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      },
+      mounted(){
+          
+      }
+         
+    })
+  </script>
+</html>
