@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <!-- emoji -->
+  <!-- <link href="http://cdn.staticfile.org/emoji/0.2.2/emoji.css" rel="stylesheet" type="text/css" /> -->
+  <!-- <script src="http://cdn.staticfile.org/jquery/2.1.0/jquery.min.js"></script> -->
+  <!-- <script src="http://cdn.staticfile.org/emoji/0.2.2/emoji.js"></script> -->
+
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+        font-size: 16px;
+        line-height: 1.8em;
+      }
+      #container{
+        padding: 10px 10px;
+      }
+      .title{
+         font-size: 1.2em;
+         font-weight: bolder;
+         padding-bottom: 5px;
+         text-align: center;
+      }
+      .pagetitle{
+         font-size: 1em;
+         /*font-weight: bold;*/
+         padding: 3px 0px; 
+      }
+      .section{
+         font-size: 0.9em;
+         padding: 3px 0px; 
+      }
+      #comment{
+        color:#aaa;
+        font-size: 1.5em;
+        float: right;
+        margin-right: 20px;
+      }
+      .mint-popup-top{
+        top: 10%;
+        width: 90%;
+        border-radius: 5px;
+      }
+      
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">详情</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div id="container">
+         <div v-for="item in Data" v-bind:class="item.class">{{item.content}}</div>
+    </div> 
+    <div>
+       <i class="fa fa-comments-o" id="comment" @click="addComment"></i>
+    </div>
+    <mt-popup  v-model="popupVisible" position="top" popup-transition="popup-fade">
+      <div style="">
+         <div style="display: flex;justify-content: space-between;padding: 0px 15px;">
+           <span style="color:#1E90FF;font-size: 0.8em;">取消</span>
+           <h4 style="text-align: center;">评论</h4>
+           <span style="color:#1E90FF;font-size: 0.8em;font-weight: bold;">发表</span>
+         </div>
+         <div style="display: flex;justify-content: center;border:none;">
+           <div style="width: 95%;min-height: 100px;font-size: 0.9em;" contenteditable="true" @blur="showPlaceholder($event)" @focus="hidePlaceholder($event)">
+            <p style="font-size:0.9em;color:#aaa;">我也说一句......</p>
+           </div>
+         </div>
+         <div style="padding: 0px 15px;">
+           <i class="fa fa-smile-o" style="font-size: 1.5em;"></i>
+           <span style="font-size: 0.7em;color: #aaa;float: right;"></span>
+         </div>
+         <div id='emojstext'>👬</div>
+      </div>
+    </mt-popup>
+
+  </div>
+
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    var Vm=new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         testshow1:true,
+         popupVisible:false,
+         Data:[
+         {    
+             class:'title',
+             content:'开车冲进水里应该怎么自救'
+         },
+         {    
+             class:'pagetitle',
+             content:'1、大部分人都认为车辆如果掉进水里'
+         },
+         {    
+             class:'section',
+             content:'大部分人都认为车辆如果掉进水里，车门肯定打不开。其实不是的，在车辆冲进水里的几分钟之内，车辆还没有完全沉浸入水中，这个时候力气大是可以打开门的。在这个时候，我们可以迅速打开车门进行逃生。而且，在这段时间内，车辆可能还没有断电，窗户也是可以打开的。如果打不开，破窗逃生吧。'
+         },
+         {    
+             class:'pagetitle',
+             content:'2、车辆冲进水中后'
+         },
+         {    
+             class:'section',
+             content:'车辆冲进水中后，千万不要觉得不会游泳就放弃逃生了。这不对吧，毕竟冲进水的时候，肯定旁边有看到的人，如果你从车里逃出来的话，别人看到了还可以去救你呢。'
+         },
+         {    
+             class:'pagetitle',
+             content:'3、车辆在冲进水中后'
+         },
+         {    
+             class:'section',
+             content:'车辆在冲进水中后，一定要打开车灯吸引附近人的注意力。这样逃生的几率也会大一些。千万不要坐以待毙。在车里逃出来后，如果真的不会水，可以暂时先爬上车顶等待救援。因为车辆下沉还是需要一段时间的。不要慌张就好。'
+         },
+         ]
+      },
+      computed:{
+ 
+      },
+      methods: {
+        addComment(){
+           this.popupVisible=true;
+        },
+        showPlaceholder(event){
+           if(event.target.innerHTML==''){
+            console.log(event);
+             event.target.innerHTML='<p style="font-size:0.9em;color:#aaa;">我也说一句......</p>'
+           }
+        },
+        hidePlaceholder(event){
+            if(event.target.children.length>0){
+                event.target.innerHTML='';
+            }
+        }
+      },
+      created(){
+           this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      },
+      mounted(){
+             // jEmoji.unifiedToHTML(document.getElementById('emojstext').innerHTML)
+         
+      }
+         
+    })
+  </script>
+</html>

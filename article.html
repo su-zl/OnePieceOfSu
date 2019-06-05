@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+  <link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.css">
+  <style type="text/css">
+      *{
+        margin:0px;
+        padding: 0px;
+      }
+      body{
+        background-color: #f5f5f5;
+      }
+      .container{
+        padding:10px 5px 0px 0px; 
+      }  
+      .container>li{
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 20px;
+
+      }
+      .container>li>div:first-child{
+          width: 20%;
+          text-align: center;
+
+      }
+      .day{
+        font-size: 1.5em;
+        font-weight: bolder;
+        border-left: 2px #ffa000 solid;
+      }
+      .month{
+        font-size: 0.7em;
+        border-left: 2px #ffa000 solid;
+      }
+      .container>li>div:last-child{
+        background-color: #fff;
+        padding: 5px 8px;
+        border-radius: 5px;
+      }
+      .title{
+        margin-bottom: 5px;
+      }
+      .content{
+        color: #aaa;
+        font-size: 0.7em;
+      }
+  </style>
+
+</head>
+<body>
+  <div id="app" style="visibility:hidden; " v-bind:style="{visibility:loading}">
+     <div id="header" style="padding: 5px 0px;color:#fff;background-color: rgba(0,0,0,0.8);">
+        <h3 style="text-align: center;width:150px;margin:0 auto;">文字记</h3>
+        <i class="fa fa-bars" style="font-size: 1.5em;position: absolute;right: 7px;top: 5px;" @click=""></i>
+    </div> 
+    <div>
+         <ul class="container" >
+           <li v-for="item in Data">
+              <div>
+                <div class="day">{{item.day}}</div>
+                <div class="month">{{item.month}}</div>
+              </div>
+              <div @click="readArtile(item.id)">
+                 <h4 class="title">{{item.title}}</h4>
+                 <p class="content">{{item.content}}</p>
+              </div>
+           </li>
+         </ul>
+    </div> 
+  </div>
+
+    
+</body>
+  <!-- 先引入 Vue -->
+  <script src="js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data:{
+         container:'',
+         loading:'visible',
+         testshow1:true,
+         Data:[
+         {    
+             id:'0',
+             day:'14',
+             month:'三月',
+             title:'瘦毛猴的爱情？',
+             content:'一只鱼言于郑表达方式打飞机收到货福建省倒海翻江'
+         },
+         {
+             id:'1',
+             day:'14',
+             month:'三月',
+             title:'瘦毛猴的爱情？',
+             content:'一只鱼言于郑表达方式打飞机收到货福建省倒海翻江'
+         },
+         {
+             id:'2',
+             day:'14',
+             month:'三月',
+             title:'瘦毛猴的爱情？',
+             content:'一只鱼言于郑表达方式打飞机收到货福建省倒海翻江'
+         }
+         ]
+      },
+      computed:{
+ 
+      },
+      methods: {
+        readArtile(id){
+           window.location.href="readArticle.html"
+        }
+      },
+      created(){
+           this.$indicator.open({text: '',spinnerType: 'double-bounce'});
+          setTimeout(()=>{
+            this.$indicator.close();
+          },500)
+      },
+      mounted(){
+          
+      }
+         
+    })
+  </script>
+</html>
