@@ -440,10 +440,10 @@
         }
       },
       created(){
-          this.tableHeight=window.screen.height-document.getElementById('content').offsetTop;
+          this.tableHeight=window.innerHeight-document.getElementById('content').offsetTop;
           this.tableWidth=document.getElementById('content').clientWidth;
-          this.loadingWidth=window.screen.width; 
-          this.loadingHeight=window.screen.height;
+          this.loadingWidth=window.innerWidth;
+          this.loadingHeight=window.innerHeight;
       },
       mounted(){
           
